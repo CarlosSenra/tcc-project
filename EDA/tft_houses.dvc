@@ -1,0 +1,6 @@
+outs:
+- md5: f4aabee033b5de641c030d430b42ee2d.dir
+  size: 175309885
+  nfiles: 102
+  hash: md5
+  path: tft_houses
