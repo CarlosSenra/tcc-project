@@ -1,0 +1,9 @@
+EDA:
+  folders:
+    staging_data_folder: "tft_houses/"
+    cleaned_data_folder: "dataframe_model/"
+  dataframes:
+    df_information_houses: "informations_households.csv"
+    df_uk_holidays: "uk_bank_holidays.csv"
+    df_weather: "weather_hourly_darksky.csv"
+    
