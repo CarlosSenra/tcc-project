@@ -57,7 +57,8 @@ def get_household(house):
     df = df.loc[((df['time'].dt.year >= 2013) & (df.time.dt.month.isin([1,2,3,4,5,6,7,8,9,10,11,12]))) | (df['time'].dt.year == 2014)]
     df['holiday'] = df['time'].isin(holidays['Bank holidays']) #(df.time.dt.day_of_week >= 5) | (df['time'].isin(holidays['Bank holidays']))
     df['holiday'] = df['holiday'].astype(int)
-    df = df[df.house_hold == house_selected]
+    #df = df[df.house_hold == house_selected]
+    print(df.head())
     
     return df, house
 
@@ -77,11 +78,13 @@ def transform_half_in_hourly(df : pd.DataFrame):
         df_temp = df_temp.reset_index()
         list_df.append(df_temp)
     df_final = pd.concat(list_df, ignore_index=True)
+    print(df_final.shape)
     return df_final
 
 
 def add_weater_data(df:pd.DataFrame,df_weather:pd.DataFrame):
     df_merged = pd.merge(df,df_weather,how='left',on = 'time')
+    print(df_merged.head())
     return df_merged
 
 def add_holidays(df:pd.DataFrame):
@@ -122,11 +125,11 @@ def labeling_categorical_features(df:pd.DataFrame):
 
 #if add a diferent feature in the future change this function
 def feature_eng_function(df:pd.DataFrame):
-    df['year'] = df['time'].dt.year.astype(str)
-    df['month'] = df['time'].dt.month.astype(str)
-    df['day'] = df['time'].dt.day.astype(str)
-    df['hour'] = df['time'].dt.hour.astype(str)
-    df['dayofweek_num'] = df['time'].dt.weekday.astype(str)
+    #df['year'] = df['time'].dt.year.astype(str)
+    #df['month'] = df['time'].dt.month.astype(str)
+    #df['day'] = df['time'].dt.day.astype(str)
+    #df['hour'] = df['time'].dt.hour.astype(str)
+    #df['dayofweek_num'] = df['time'].dt.weekday.astype(str)
     df['temperature'] = df['temperature'].apply(lambda x: 0 if x == np.nan else x)
     df['windSpeed'] = df['windSpeed'].apply(lambda x: 0 if x == np.nan else x)
     df, dict_labels = labeling_categorical_features(df)

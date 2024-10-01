@@ -12,16 +12,18 @@ acorn_dict = {'luxuryLife' : ['ACORN-A', 'ACORN-B', 'ACORN-C'],
                 'lowIncomeLiving' : ['ACORN-U']}
 
 
-weather_hourly = pd.read_csv(os.getcwd() + '\\' + 'weather_hourly_darksky.csv')
+weather_hourly = pd.read_csv(os.getcwd() + '/' + 'weather_hourly_darksky.csv')
 weather_hourly.time = pd.to_datetime(weather_hourly.time)
 weather = weather_hourly[['time','temperature','windSpeed','precipType','icon','summary']]
 
 #block_numbers_list = functions.get_random_blocks(num_blocks = 5, seed=42)
-house_list = functions.get_acorn_houses_list(acorn_dict,size=5,seed=10)
+house_list = os.listdir("../EDA/tft_houses/")
 
 if __name__ == '__main__':
-    for house in house_list:
+    for house in house_list[:1]:
+        print(house)
         df, house_select = functions.get_household(house)
+
         df_block = functions.transform_half_in_hourly(df)
         df_block_weather = functions.add_weater_data(df_block,weather)
         df_block_weather = functions.add_holidays(df_block_weather)
@@ -31,6 +33,7 @@ if __name__ == '__main__':
         blocks = blocks.reset_index(drop=True).reset_index()
         blocks = blocks.rename(columns={'index':'time_idx'})
         blocks = blocks.drop(columns='time')
-        functions.save_json(dict_labels,house_select)
-        blocks.to_csv(f'dataframe_model\{house_select}.csv',index=False)
+        print(blocks)
+       # functions.save_json(dict_labels,house_select)
+      #  blocks.to_csv(f'dataframe_model\{house_select}.csv',index=False)
 
