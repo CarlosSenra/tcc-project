@@ -3,64 +3,29 @@ import numpy as np
 import random
 import os
 import json
+from omegaconf import OmegaConf
 
-def get_random_blocks(num_blocks = 5, seed=42):
-    random.seed(seed)
-    block_numbers_list = []
-    for _ in range(num_blocks):
-        numero_aleatorio = random.randint(0, 111)
-        block_numbers_list.append(numero_aleatorio)
-    return block_numbers_list
+conf = OmegaConf.load('../config.yaml')
 
-def get_random_household(block_numer, seed = 42):
-    random.seed(seed)
-    holidays = pd.read_csv('uk_bank_holidays.csv')
+def get_household(csv_file):
+    def read_house_csv(csv_file):
+        df = pd.read_csv(conf["EDA"]["folders"]["staging_data_folder"] + csv_file)
+        return df 
+
+    holidays = pd.read_csv(conf["EDA"]["dataframes"]["df_uk_holidays"])
     holidays['Bank holidays'] = pd.to_datetime(holidays['Bank holidays'])
     holidays = holidays.loc[(holidays['Bank holidays'].dt.year >= 2013)]
-    df = pd.read_csv(f'halfhourly_dataset/halfhourly_dataset/block_{block_numer}.csv')
+    df = read_house_csv(csv_file)
     df = df.rename(columns={'LCLid':'house_hold','tstp':'time','energy(kWh/hh)':'Energy_kwh'})
-    df.iloc[df[df.Energy_kwh == 'Null'].Energy_kwh.index,2] = '0'
-    df.Energy_kwh = pd.to_numeric(df.Energy_kwh)
-    df.time = pd.to_datetime(df.time)
-    df = df.loc[((df['time'].dt.year >= 2013) & (df.time.dt.month.isin([1,2,3,4,5,6,7,8,9,10,11,12]))) | (df['time'].dt.year == 2014)]
-    df['weekend_holiday'] = (df.time.dt.day_of_week >= 5) | (df['time'].isin(holidays['Bank holidays']))
-    df['weekend_holiday'] = df['weekend_holiday'].astype(int)
-    house_selected = random.choice(df.house_hold.unique())
-    df = df[df.house_hold == house_selected]
-    house_selected = f"block_{block_numer}_"+house_selected
-    
-    return df, house_selected
-
-
-def get_acorn_houses_list(acorn_dict,size=5,seed=10):
-    info_dataset = pd.read_csv(f'informations_households.csv')
-    np.random.seed(seed)
-    house_list = []
-    for key in acorn_dict.keys():
-        sample = info_dataset[info_dataset.Acorn.isin(acorn_dict[key])].sample(size)
-        for i in range(len(sample)):
-            house_list.append(key + '_' +  sample.iloc[i,-1] + '_' + sample.iloc[i,0])
-    
-    return house_list
-
-def get_household(house):
-    block = house.split('_')[1] + '_' + house.split('_')[2]
-    house_selected = house.split('_')[-1]
-    holidays = pd.read_csv('uk_bank_holidays.csv')
-    holidays['Bank holidays'] = pd.to_datetime(holidays['Bank holidays'])
-    holidays = holidays.loc[(holidays['Bank holidays'].dt.year >= 2013)]
-    df = pd.read_csv(f'halfhourly_dataset/halfhourly_dataset/{block}.csv')
-    df = df.rename(columns={'LCLid':'house_hold','tstp':'time','energy(kWh/hh)':'Energy_kwh'})
-    df.iloc[df[df.Energy_kwh == 'Null'].Energy_kwh.index,2] = '0'
+    df.iloc[df[df["Energy_kwh"].isin(["Null"])]["Energy_kwh"].index,3] = '0'
     df.Energy_kwh = pd.to_numeric(df.Energy_kwh)
     df.time = pd.to_datetime(df.time)
     df = df.loc[((df['time'].dt.year >= 2013) & (df.time.dt.month.isin([1,2,3,4,5,6,7,8,9,10,11,12]))) | (df['time'].dt.year == 2014)]
     df['holiday'] = df['time'].isin(holidays['Bank holidays']) #(df.time.dt.day_of_week >= 5) | (df['time'].isin(holidays['Bank holidays']))
     df['holiday'] = df['holiday'].astype(int)
     #df = df[df.house_hold == house_selected]
-    print(df.head())
     
-    return df, house
+    return df
 
 def transform_half_in_hourly(df : pd.DataFrame):
     """ 
@@ -125,11 +90,11 @@ def labeling_categorical_features(df:pd.DataFrame):
 
 #if add a diferent feature in the future change this function
 def feature_eng_function(df:pd.DataFrame):
-    #df['year'] = df['time'].dt.year.astype(str)
-    #df['month'] = df['time'].dt.month.astype(str)
-    #df['day'] = df['time'].dt.day.astype(str)
-    #df['hour'] = df['time'].dt.hour.astype(str)
-    #df['dayofweek_num'] = df['time'].dt.weekday.astype(str)
+    df['year'] = df['time'].dt.year.astype(str)
+    df['month'] = df['time'].dt.month.astype(str)
+    df['day'] = df['time'].dt.day.astype(str)
+    df['hour'] = df['time'].dt.hour.astype(str)
+    df['dayofweek_num'] = df['time'].dt.weekday.astype(str)
     df['temperature'] = df['temperature'].apply(lambda x: 0 if x == np.nan else x)
     df['windSpeed'] = df['windSpeed'].apply(lambda x: 0 if x == np.nan else x)
     df, dict_labels = labeling_categorical_features(df)
