@@ -13,7 +13,7 @@ if __name__ == "__main__":
     eval_folder = conf['models']['eval_metrics']
     pred_folder = conf['models']['predictions']
 
-    for file_name in os.listdir(df_folder)[0]:
+    for file_name in os.listdir(df_folder):
         print(file_name)
         df = pd.read_csv(f"{df_folder}{file_name}")
         df['time'] = pd.to_datetime(df['time'])

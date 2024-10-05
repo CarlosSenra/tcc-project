@@ -1,16 +1,13 @@
 from prophet import Prophet
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error,mean_absolute_percentage_error
 import time
 import pandas as pd
 import numpy as np
 
 
-def mean_absolute_percentage_error(y_true, y_pred):
-    return np.mean(np.abs((y_true - y_pred) / y_true))
-
 # Função para calcular SMAPE
 def symmetric_mean_absolute_percentage_error(y_true, y_pred):
-    return np.mean(2 * np.abs(y_pred - y_true) / (np.abs(y_true) + np.abs(y_pred)))
+    return np.mean(np.abs(y_pred - y_true) / (np.abs(y_true) + np.abs(y_pred)))
 
 def prophet(df:pd.DataFrame,df_name:str,eval_folder:str,pred_folder:str) -> None:
 

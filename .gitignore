@@ -8,6 +8,8 @@
 
 /src_NeuralProphet/predictions/*.csv
 
+/src_NeuralProphet/lightning_logs/*
+
 /src_Prophet/eval_metrics/*.csv
 
 /src_Prophet/predictions/*.csv
