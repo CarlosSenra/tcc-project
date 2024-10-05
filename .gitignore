@@ -4,14 +4,14 @@
 
 /EDA/dataframe_model/*
 
-/src_NeuralProphet/eval_metrics/*
+/src_NeuralProphet/eval_metrics/*.csv
 
-/src_NeuralProphet/predictions/*
+/src_NeuralProphet/predictions/*.csv
 
-/src_Prophet/eval_metrics/*
+/src_Prophet/eval_metrics/*.csv
 
-/src_Prophet/predictions/*
+/src_Prophet/predictions/*.csv
 
-/src_Sarimax/eval_metrics/*
+/src_Sarimax/eval_metrics/*.csv
 
-/src_Sarimax/predictions/*
+/src_Sarimax/predictions/*.csv
