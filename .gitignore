@@ -1,5 +1,17 @@
-EDA/halfhourly_dataset/*
+/EDA/halfhourly_dataset/*
 
-EDA/tft_houses/*
+/EDA/tft_houses/*
 
-EDA/dataframe_model/*
+/EDA/dataframe_model/*
+
+/src_NeuralProphet/eval_metrics/*
+
+/src_NeuralProphet/predictions/*
+
+/src_Prophet/eval_metrics/*
+
+/src_Prophet/predictions/*
+
+/src_Sarimax/eval_metrics/*
+
+/src_Sarimax/predictions/*
