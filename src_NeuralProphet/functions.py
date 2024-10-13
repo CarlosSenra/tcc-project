@@ -26,8 +26,8 @@ def neural_prophet(df:pd.DataFrame,df_name:str,eval_folder:str,pred_folder:str) 
     print("\nPasso 3: Configuração do modelo Neural Prophet")
     model = NeuralProphet(
         daily_seasonality=True,
-        weekly_seasonality=True,
-        yearly_seasonality=True,
+        weekly_seasonality=False,
+        yearly_seasonality=False,
         batch_size=64,
         epochs=100,
         trainer_config = {"accelerator":"gpu"}

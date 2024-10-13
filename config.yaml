@@ -12,3 +12,5 @@ models:
     dataframes_folder : "../EDA/dataframe_model/"
   eval_metrics: "eval_metrics/"
   predictions: "predictions/"
+  results: "results/"
+

@@ -4,6 +4,8 @@
 
 /EDA/dataframe_model/*
 
+/src_NeuralProphet/*.csv
+
 /src_NeuralProphet/eval_metrics/*.csv
 
 /src_NeuralProphet/predictions/*.csv
