@@ -19,3 +19,5 @@
 /src_Sarimax/eval_metrics/*.csv
 
 /src_Sarimax/predictions/*.csv
+
+/src_Prophet_combinations/results/predictions/*
