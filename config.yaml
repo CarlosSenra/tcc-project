@@ -13,4 +13,24 @@ models:
   eval_metrics: "eval_metrics/"
   predictions: "predictions/"
   results: "results/"
+  parcial: "results/_parcial/"
 
+neural_prophet:
+  daily_seasonality: True
+  weekly_seasonality: False
+  yearly_seasonality: False
+  batch_size: 64
+  epochs: 100
+  accelerator: "gpu"
+  learning_rate: 0.001
+
+data:
+  time_column: "time"
+  target_column: "Energy_kwh"
+  covariates:
+    - "holiday"
+    - "month"
+    - "hour"
+    - "dayofweek_num"
+    - "precipType"
+    - "bool_weather_missing_values"

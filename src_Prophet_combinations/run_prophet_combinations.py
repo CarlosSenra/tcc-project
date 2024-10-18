@@ -5,8 +5,6 @@ import functions
 
 conf = OmegaConf.load('../config.yaml')
 
-
-
 if __name__ == "__main__":
 
     df_folder = conf.models.train.dataframes_folder

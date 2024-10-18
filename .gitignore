@@ -21,3 +21,9 @@
 /src_Sarimax/predictions/*.csv
 
 /src_Prophet_combinations/results/predictions/*
+
+/src_Prophet_combinations/cleaning_metrics_copy.py
+
+/src__neural_Prophet_combinations/results/predictions/*
+
+/src__neural_Prophet_combinations/cleaning_metrics_copy.py
