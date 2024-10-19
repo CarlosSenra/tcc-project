@@ -65,7 +65,7 @@ def prophet_with_covariates(df: pd.DataFrame, df_name: str, conf: OmegaConf) -> 
     df_prophet = df.rename(columns={'time': 'ds', 'Energy_kwh': 'y'})
     
     covariates = ['holiday', 'month', 'hour', 'dayofweek_num', 'precipType', 'bool_weather_missing_values']
-    covariate_combinations = list(itertools.combinations(covariates, 1))
+    covariate_combinations = list(itertools.combinations(covariates, 6))
     
     train_size = len(df) - 168
     df_train = df_prophet[:train_size]
