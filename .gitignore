@@ -27,3 +27,7 @@
 /src__neural_Prophet_combinations/results/predictions/*
 
 /src__neural_Prophet_combinations/cleaning_metrics_copy.py
+
+/src_LSTM/lightning_logs/*
+
+/src_LSTM/LSTM_logs/*
