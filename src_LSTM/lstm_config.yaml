@@ -1,0 +1,4 @@
+paths:
+   eval_folder: 'eval_metrics/'
+   results_folder: 'results/'
+   pred_folder: 'preditions/'
