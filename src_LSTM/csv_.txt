@@ -1,2 +1,5 @@
 stretchedSociety_block_91_MAC000350.csv
 establishedAffluence_block_26_MAC002966.csv
+establishedAffluence_block_37_MAC000782.csv
+establishedAffluence_block_17_MAC002007.csv
+establishedAffluence_block_23_MAC004625.csv
