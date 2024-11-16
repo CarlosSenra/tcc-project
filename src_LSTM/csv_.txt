@@ -4,3 +4,6 @@ establishedAffluence_block_37_MAC000782.csv
 establishedAffluence_block_17_MAC002007.csv
 establishedAffluence_block_23_MAC004625.csv
 stretchedSociety_block_93_MAC004547.csv
+stretchedSociety_block_98_MAC001062.csv
+stretchedSociety_block_98_MAC001062.csv
+stretchedSociety_block_99_MAC004799.csv
