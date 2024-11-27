@@ -31,3 +31,7 @@
 /src_LSTM/lightning_logs/*
 
 /src_LSTM/LSTM_logs/*
+
+/src_GRU/lightning_logs/*
+
+/src_GRU/GRU_logs/*
